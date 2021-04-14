@@ -6,31 +6,21 @@ import HomeScreen from '../screens/home'
 import SignInScreen from '../screens/login'
 import SplashScreen from '../splash/SplashScreen';
 import { useSelector } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import BottomTab from './tabNavigator'
 
 
 const Stack = createStackNavigator();
-let userToken;
 
 function App() {
 
-    React.useEffect(() => {
-        const bootstrapAsync = async () => {
-            try {
-                userToken = await AsyncStorage.getItem('id_token');
-            } catch (e) {
-            }
-        };
-        bootstrapAsync();
-    }, []);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
 
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {userToken == null ? (
-                    <Stack.Screen name="Home" component={HomeScreen} />
+                {isAuthenticated ? (
+                    <Stack.Screen name="Home" component={BottomTab} />
 
                 ) : (
 

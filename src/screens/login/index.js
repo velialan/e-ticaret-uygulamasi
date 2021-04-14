@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react'
-import { View, Button } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { View, Button, ActivityIndicator } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, logoutUser } from '../../actions/action'
 
 
@@ -20,11 +20,14 @@ const getData = async () => {
 export default function ALoginpp() {
 
     const dispatch = useDispatch();
+    const isFetching = useSelector(state => state.auth.isFetching);
 
    
     return (
         <View>
-            <Button title="giris yap" onPress={() => dispatch(loginUser({ email: 'veli.alan03@gmail.com', password: 'asdasdasd' }))} />
+            {
+                isFetching?<Button title="giris yap" onPress={() => dispatch(loginUser({ email: 'veli.alan03@gmail.com', password: 'asdasdasd' }))} />:<ActivityIndicator size="large" color="red"/>
+            }
             <Button title="getir" onPress={getData} />
             <Button title="Çıkış" onPress={() => dispatch(logoutUser())} />
         </View>

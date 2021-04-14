@@ -7,20 +7,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const getData = async () => {
     try {
-      const value = await AsyncStorage.getItem('id_token')
-      if(value !== null) {
-        return true
-      }
-    } catch(e) {
+        const value = await AsyncStorage.getItem('id_token')
+        if (value !== null) {
+            return true
+        }else{
+            return false
+        }
+    } catch (e) {
         return false
     }
-  }
-  
+}
+
 
 
 function authReducer(state = {
     isFetching: false,
-    isAuthenticated:  getData()
+    isAuthenticated: getData()
 }, action) {
     switch (action.type) {
         case LOGIN_REQUEST:
@@ -34,7 +36,8 @@ function authReducer(state = {
                 isFetching: false,
                 isAuthenticated: true,
                 errorMessage: '',
-                id_token:action.id_token
+                id_token: action.id_token,
+                name: action.name
             })
         case LOGIN_FAILURE:
             return Object.assign({}, state, {
