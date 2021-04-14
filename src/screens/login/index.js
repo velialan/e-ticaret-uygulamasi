@@ -26,7 +26,7 @@ export default function ALoginpp() {
     return (
         <View>
             {
-                isFetching?<Button title="giris yap" onPress={() => dispatch(loginUser({ email: 'veli.alan03@gmail.com', password: 'asdasdasd' }))} />:<ActivityIndicator size="large" color="red"/>
+                isFetching?<ActivityIndicator size="large" color="red"/>:<Button title="giris yap" onPress={() => dispatch(loginUser({ email: 'veli.alan03@gmail.com', password: 'asdasdasd' }))} />
             }
             <Button title="getir" onPress={getData} />
             <Button title="Çıkış" onPress={() => dispatch(logoutUser())} />

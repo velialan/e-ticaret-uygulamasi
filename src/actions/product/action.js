@@ -4,14 +4,14 @@ import axios from 'axios';
 function requestGETPRODUCT() {
     return {
         type: GET_PRODUCT_REQUEST,
-        isFetching: true,
+        isProductFetching: true,
     }
 }
 
 function receiveGETPRODUCT(data) {
     return {
         type: GET_PRODUCT_SUCCESS,
-        isFetching: false,
+        isProductFetching: false,
         products:data.data
     }
 }
@@ -19,7 +19,7 @@ function receiveGETPRODUCT(data) {
 function failureGETPRODUCT(message) {
     return {
         type: GET_PRODUCT_FAILURE,
-        isFetching: false,
+        isProductFetching: false,
         message
     }
 }

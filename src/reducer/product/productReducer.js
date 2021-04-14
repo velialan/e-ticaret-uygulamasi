@@ -6,23 +6,22 @@ import { GET_PRODUCT_SUCCESS, GET_PRODUCT_REQUEST, GET_PRODUCT_FAILURE } from '.
 
 
 function productReducer(state = {
-    isFetching: false,
+    isProductFetching: false,
     data: []
 }, action) {
     switch (action.type) {
         case GET_PRODUCT_REQUEST:
             return Object.assign({}, state, {
-                isFetching: true,
+                isProductFetching: true,
             })
         case GET_PRODUCT_SUCCESS:
             return Object.assign({}, state, {
-                isFetching: false,
+                isProductFetching: false,
                 products: action.products
             })
         case GET_PRODUCT_FAILURE:
             return Object.assign({}, state, {
-                isFetching: false,
-                isAuthenticated: false,
+                isProductFetching: false,
                 errorMessage: action.message
             })
 

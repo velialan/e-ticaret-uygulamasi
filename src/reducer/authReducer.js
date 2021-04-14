@@ -10,7 +10,7 @@ const getData = async () => {
         const value = await AsyncStorage.getItem('id_token')
         if (value !== null) {
             return true
-        }else{
+        } else {
             return false
         }
     } catch (e) {
@@ -22,7 +22,7 @@ const getData = async () => {
 
 function authReducer(state = {
     isFetching: false,
-    isAuthenticated: getData()
+    isAuthenticated: getData
 }, action) {
     switch (action.type) {
         case LOGIN_REQUEST:

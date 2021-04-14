@@ -13,7 +13,7 @@ import {
 import theme from '../utils/theme'
 
 const Input = styled(TextInput).attrs(props => ({
-  placeholderTextColor: theme.colors[props.placeholderTextColor] || '#999'
+  placeholderTextColor: theme.colors[props.placeholderTextColor] || '#252a34'
 }))(
   compose(
     borderRadius,

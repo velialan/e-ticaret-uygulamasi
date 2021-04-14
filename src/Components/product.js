@@ -7,7 +7,7 @@ import Button from './button'
 //import {Image} from 'react-native'
 export default function Product({ image, title, price }) {
     return (
-        <Button flex={1} mx={10} p={1} my={10} borderRadius={10}>
+        <Button flex={1} m={9} borderRadius={10}>
             <Image source={{ uri: image }} style={{ height: 180, width: '100%', resizeMode: 'cover', borderRadius: 5 }} />
             <Text>{title}</Text>
             <Text>{price}₺</Text>
