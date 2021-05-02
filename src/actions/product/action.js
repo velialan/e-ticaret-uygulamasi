@@ -1,5 +1,6 @@
 import { GET_PRODUCT_REQUEST, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAILURE } from '../actionTypes'
 import axios from 'axios';
+import { API_URL } from '../../config';
 
 function requestGETPRODUCT() {
     return {
@@ -30,7 +31,7 @@ export function GETProduct() {
     
     return dispatch => {
         dispatch(requestGETPRODUCT())
-        return axios.get('http://yazilimisleri.com/api/products')
+        return axios.get(`${API_URL}/products`)
             .then(response => {
                 if (response.status != 200) {
                     dispatch(failureGETPRODUCT("request failed"))

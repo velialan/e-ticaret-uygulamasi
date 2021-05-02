@@ -2,6 +2,8 @@ import counterReducer from './counter'
 import loggedReducer from './isLogged'
 import authReducer from './authReducer'
 import productReducer from './product/productReducer'
+import sliderReducer from './slider/sliderReducer'
+
 import { combineReducers } from 'redux'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,7 +19,9 @@ const allReducers = combineReducers({
     counter: counterReducer,
     isLogged: loggedReducer,
     auth: persistReducer(persistConfig, authReducer),
-    product: persistReducer(persistConfig, productReducer)
+    product: persistReducer(persistConfig, productReducer),
+    slider: persistReducer(persistConfig, sliderReducer)
+
 })
 
 export default allReducers;
