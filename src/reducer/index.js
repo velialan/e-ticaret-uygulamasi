@@ -15,12 +15,20 @@ const persistConfig = {
     storage: AsyncStorage,
 };
 
+// const allReducers = combineReducers({
+//     counter: counterReducer,
+//     isLogged: loggedReducer,
+//     auth: persistReducer(persistConfig, authReducer),
+//     product: persistReducer(persistConfig, productReducer),
+//     slider: persistReducer(persistConfig, sliderReducer)
+
+// })
 const allReducers = combineReducers({
     counter: counterReducer,
     isLogged: loggedReducer,
     auth: persistReducer(persistConfig, authReducer),
-    product: persistReducer(persistConfig, productReducer),
-    slider: persistReducer(persistConfig, sliderReducer)
+    product: productReducer,
+    slider: sliderReducer
 
 })
 

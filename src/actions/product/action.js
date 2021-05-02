@@ -31,7 +31,11 @@ export function GETProduct() {
     
     return dispatch => {
         dispatch(requestGETPRODUCT())
-        return axios.get(`${API_URL}/products`)
+        return axios.get(`${API_URL}/products`, {
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8'
+            }
+          })
             .then(response => {
                 if (response.status != 200) {
                     dispatch(failureGETPRODUCT("request failed"))
