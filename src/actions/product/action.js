@@ -13,7 +13,7 @@ function receiveGETPRODUCT(data) {
     return {
         type: GET_PRODUCT_SUCCESS,
         isProductFetching: false,
-        products:data.data
+        products: data.data
     }
 }
 
@@ -27,15 +27,15 @@ function failureGETPRODUCT(message) {
 
 
 //GET PRODUCT
-export function GETProduct() {
-    
+export function GETProduct({param}) {
+
     return dispatch => {
         dispatch(requestGETPRODUCT())
-        return axios.get(`${API_URL}/products`, {
+        return axios.get(`${API_URL}/products${param}`, {
             headers: {
-              'Content-Type': 'application/json; charset=utf-8'
+                'Content-Type': 'application/json; charset=utf-8'
             }
-          })
+        })
             .then(response => {
                 if (response.status != 200) {
                     dispatch(failureGETPRODUCT("request failed"))

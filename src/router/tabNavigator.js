@@ -4,12 +4,14 @@ import Favorite from '../screens/favorite';
 import HomeScreen from '../screens/home';
 import Notification from '../screens/notification';
 import Profile from '../screens/profile';
-import { Home, Heart, Bell, User } from '../Components/icons'
+import { Home, Heart, Bell, User } from '../Components/icons';
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator >
+                          
+
             <Tab.Screen
                 options={{
                     tabBarLabel: 'Ana Sayfa',

@@ -5,17 +5,19 @@ import { GETProduct } from '../../actions/product/action'
 import { GETSlider } from '../../actions/slider/action'
 import Box from '../../Components/box'
 import Image from '../../Components/image'
+import Button from '../../Components/button'
+
 import Text from '../../Components/text'
 import TextInput from '../../Components/textinput'
 import Product from '../../Components/product'
 import { Search } from '../../Components/icons';
-import { FlatList, Button, ActivityIndicator, useWindowDimensions, SafeAreaView, ScrollView } from 'react-native';
+import { FlatList, ActivityIndicator, useWindowDimensions, StatusBar, ScrollView } from 'react-native';
 import { FlatListSlider } from 'react-native-flatlist-slider';
 
 export default function Home() {
 
     React.useEffect(() => {
-        dispatch(GETProduct())
+        dispatch(GETProduct({param:'?new=0&featured=1'}))
         dispatch(GETSlider())
     }, [])
 
@@ -32,27 +34,10 @@ export default function Home() {
 
 
 
-    const header = () => {
-        return (
-            <Box my={1}  >
-                <TextInput
-                    style={{
-                        elevation: 10,
-                    }}
-                    bg="white"
-                    placeholder="Search Your Product"
-                    pl={52}
-
-                />
-                <Box position="absolute" style={{ elevation: 10 }} height={52} pl={16} justifyContent="center" alignItems="center">
-                    <Search width={25} height={25} stroke="#818181" />
-                </Box>
-            </Box>
-        )
-    }
 
     return (
-        <Box flex={1} bg="#fff" >
+        <Box as={ScrollView} flex={1} bg="#fff" >
+            <StatusBar hidden backgroundColor="transparent" />
             {isSliderFetching ?
                 <Box justifyContent="center" height={windowHeight * .30} bg="#252a34">
                     <ActivityIndicator size="large" color="red" />
@@ -72,20 +57,57 @@ export default function Home() {
                         animation
                     />
                 )}
-
-            {isProductFetching ? <ActivityIndicator size="large" color="red" /> : (
-                <FlatList
-                style={{height:200}}
-                    horizontal={true}
-                    data={products}
-                    renderItem={({ item, index }) => <Product  key={index.toString()} image={item.base_image.original_image_url} price={item.formated_price} title={item.name} />}
-                    keyExtractor={item => item.id}
-                />
-            )} 
-
-
-            {/* <Button title="çıkış yap" onPress={() => dispatch(logoutUser())} />
-            <Button title="get user" onPress={() => dispatch(GETUser())} /> */}
+            <Box mx={10}>
+                <Box mx={10} my={10} flexDirection="row" justifyContent="space-between">
+                    <Text fontSize={16} color="blue" fontWeight="bold">Öne Çıkanlar</Text>
+                    <Button>
+                        <Text fontSize={16} color="blue" fontWeight="bold">Tümünü gör</Text>
+                    </Button>
+                </Box>
+                {isProductFetching ? <ActivityIndicator size="large" color="red" /> : (
+                    <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                        data={products}
+                        renderItem={({ item, index }) => <Product key={index.toString()} image={item.base_image.original_image_url} price={item.formated_price} title={item.name} />}
+                        keyExtractor={item => item.id}
+                    />
+                )}
+            </Box>
+            <Box mx={10}>
+                <Box mx={5} flexDirection="row" justifyContent="space-between">
+                    <Text fontSize={16} color="blue" fontWeight="bold">Yeni Ürünler</Text>
+                    <Button>
+                        <Text fontSize={16} color="blue" fontWeight="bold">Tümünü gör</Text>
+                    </Button>
+                </Box>
+                {isProductFetching ? <ActivityIndicator size="large" color="red" /> : (
+                    <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                        data={products}
+                        renderItem={({ item, index }) => <Product key={index.toString()} image={item.base_image.original_image_url} price={item.formated_price} title={item.name} />}
+                        keyExtractor={item => item.id}
+                    />
+                )}
+            </Box>
+            <Box mx={10}>
+                <Box mx={5} flexDirection="row" justifyContent="space-between">
+                    <Text fontSize={16} color="blue" fontWeight="bold">Yeni Ürünler</Text>
+                    <Button>
+                        <Text fontSize={16} color="blue" fontWeight="bold">Tümünü gör</Text>
+                    </Button>
+                </Box>
+                {isProductFetching ? <ActivityIndicator size="large" color="red" /> : (
+                    <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                        data={products}
+                        renderItem={({ item, index }) => <Product key={index.toString()} image={item.base_image.original_image_url} price={item.formated_price} title={item.name} />}
+                        keyExtractor={item => item.id}
+                    />
+                )}
+            </Box>
 
         </Box>
     )

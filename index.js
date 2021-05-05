@@ -15,7 +15,7 @@ import { ThemeProvider } from 'styled-components'
 import theme from './src/utils/theme'
 const myStore = createStore(allReducers, applyMiddleware(thunk));
 const persistor = persistStore(myStore); 
-
+ 
 const Root = () => (  
   <Provider store={myStore}>
     <PersistGate loading={null} persistor={persistor}>

@@ -14,8 +14,10 @@ function App() {
 
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
+        <NavigationContainer >
+            <Stack.Navigator  screenOptions={{
+    headerShown: false
+  }}>
                 {isAuthenticated ? (
                     <Stack.Screen name="Home" component={BottomTab} />
 
