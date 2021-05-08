@@ -1,8 +1,9 @@
 import counterReducer from './counter'
 import loggedReducer from './isLogged'
-import authReducer from './authReducer'
+import authReducer from './auth/authReducer'
 import productReducer from './product/productReducer'
 import sliderReducer from './slider/sliderReducer'
+import cartReducer from './cart/cartReducer'
 
 import { combineReducers } from 'redux'
 
@@ -26,9 +27,10 @@ const persistConfig = {
 const allReducers = combineReducers({
     counter: counterReducer,
     isLogged: loggedReducer,
-    auth: persistReducer(persistConfig, authReducer),
+    auth:  authReducer,
     product: productReducer,
-    slider: sliderReducer
+    slider: sliderReducer,
+    cart: cartReducer
 
 })
 

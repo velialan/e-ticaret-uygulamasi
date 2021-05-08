@@ -1,5 +1,5 @@
 
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../actions/actionTypes'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../../actions/actionTypes'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 

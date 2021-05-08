@@ -1,6 +1,7 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, LOGOUT_SUCCESS } from './actionTypes'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, LOGOUT_SUCCESS } from '../actionTypes'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { API_URL } from '../../config';
 
 function requestLogout() {
     return {
@@ -67,8 +68,8 @@ export function loginUser(creds) {
                     return Promise.reject("request failed")
                 } else if (response.status == 200) {
 
+                    console.log(response.data.token)
                     AsyncStorage.setItem('id_token', response.data.token)
-                    console.log(response.data)
                     dispatch(receiveLogin(response.data))
                 }
             }).catch(err => console.log("Error: ", err))
@@ -98,16 +99,16 @@ function failureGETUSER(message) {
     }
 }
 
-const getData = async () => {
-    try {
-        const value = await AsyncStorage.getItem('id_token')
-        if (value !== null) {
-            return value
-        }
-    } catch (e) {
-        return false
-    }
-}
+// const getData = async () => {
+//     try {
+//         const value = await AsyncStorage.getItem('id_token')
+//         if (value !== null) {
+//             return value
+//         }
+//     } catch (e) {
+//         return false
+//     }
+// }
 
 //GET USER
 export function GETUser() {
@@ -115,7 +116,7 @@ export function GETUser() {
 
     const config = {
         headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC95YXppbGltaXNsZXJpLmNvbVwvYXBpXC9jdXN0b21lclwvbG9naW4iLCJpYXQiOjE2MTgzODU1NDgsImV4cCI6MTYxODM4OTE0OCwibmJmIjoxNjE4Mzg1NTQ4LCJqdGkiOiIwejZYTlRmcWtVNDBiVDVoIiwic3ViIjoxLCJwcnYiOiI4ZmNhMDg4YWJhZTJmOWE4Zjg0YTVmMGJmNmE2NTI0NDkwNTViZTAwIn0.XqMBCclYr2mbd7AD66Jos5qpu0YfvUOSXaovgQcnpEA`,
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC95YXppbGltaXNsZXJpLmNvbVwvYXBpXC9jdXN0b21lclwvbG9naW4iLCJpYXQiOjE2MjA0Njk2NTUsImV4cCI6MTYyMDQ3MzI1NSwibmJmIjoxNjIwNDY5NjU1LCJqdGkiOiJBRmhaVDJsUGgyc2tVV1lKIiwic3ViIjoxLCJwcnYiOiI4ZmNhMDg4YWJhZTJmOWE4Zjg0YTVmMGJmNmE2NTI0NDkwNTViZTAwIn0.MWrbYNGn8XDG48xu9ZBOMA0vVJLz79NckEV4JReI7k8`,
           
         }
     };
@@ -127,11 +128,9 @@ export function GETUser() {
                     dispatch(failureGETUSER("request failed"))
                     return Promise.reject("request failed")
                 } else if (response.status == 200) {
-                    console.log(response.data)
+                    // console.log(response)
                     dispatch(receiveGETUSER(response.data))
                 }
             }).catch(err => console.log("Error: ", err))
     }
 }
-
-

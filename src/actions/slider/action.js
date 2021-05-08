@@ -37,7 +37,7 @@ export function GETSlider() {
                     dispatch(failureGETSLIDER("request failed"))
                     return Promise.reject("request failed")
                 } else if (response.status == 200) {
-                    console.log(response.data)
+                    // console.log(response.data)
                     dispatch(receiveGETSLIDER(response.data))
                 }
             }).catch(err => console.log("Error: ", err))
