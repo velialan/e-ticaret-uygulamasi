@@ -17,7 +17,7 @@ const myStore = createStore(allReducers, applyMiddleware(thunk));
 // const persistor = persistStore(myStore); 
  
 const Root = () => (     
-  <Provider store={myStore}>
+  <Provider store={myStore}> 
     
       <ThemeProvider theme={theme}>
         <Router />
