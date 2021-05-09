@@ -27,15 +27,17 @@ function failureADDCART(message) {
 
 
 //GET PRODUCT
-export function Addcart({ product_id, token }) {
+export function Addcart(params) {
     return dispatch => {
         dispatch(requestADDCART())
-        return axios.post(`${API_URL}/checkout/cart/add/${product_id}?token=true`, [{
-            "quantity": 2,
+        return axios.post(`${API_URL}/checkout/cart/add/${params.id}?token=true`, [{
+            "product_id": params.id,
+            "quantity": 1,
             "is_configurable": false
         }], {
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
+                'Authorization': `Bearer ${params.token}`
             }
         })
             .then(response => {

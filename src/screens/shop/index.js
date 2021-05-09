@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export default function Notification() {
+export default function Shop() {
     return (
         <View>
-            <Text>Notification</Text>
+            <Text>Shop</Text>
         </View>
     )
 }

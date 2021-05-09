@@ -1,30 +1,16 @@
 
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../../actions/actionTypes'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
-
-
-const getData = async () => {
-    try {
-        const value = await AsyncStorage.getItem('id_token')
-        if (value !== null) {
-            return true
-        } else {
-            return false
-        }
-    } catch (e) {
-        return false
-    }
-}
-
-
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, RESTORE_TOKEN } from '../../actions/actionTypes'
 
 function authReducer(state = {
     isFetching: false,
-    isAuthenticated: getData
+    isAuthenticated: false,
+    errorMessage:null
 }, action) {
     switch (action.type) {
+        case RESTORE_TOKEN:
+            return Object.assign({}, state, {
+                isAuthenticated: action.data,
+            })
         case LOGIN_REQUEST:
             return Object.assign({}, state, {
                 isFetching: true,
@@ -35,7 +21,7 @@ function authReducer(state = {
             return Object.assign({}, state, {
                 isFetching: false,
                 isAuthenticated: true,
-                errorMessage: '',
+                errorMessage: 'Giriş Başarılı',
                 id_token: action.id_token,
                 name: action.name
             })
@@ -47,7 +33,7 @@ function authReducer(state = {
             })
         case LOGOUT_SUCCESS:
             return Object.assign({}, state, {
-                isFetching: true,
+                isFetching: false,
                 isAuthenticated: false
             })
         default:

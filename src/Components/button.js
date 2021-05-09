@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {TouchableOpacity} from 'react-native';
-import {compose, color,border, size, flexbox,space,borderRadius,position } from 'styled-system'
+import {compose, color,border, size, flexbox,space,borderRadius,position,zIndex,shadow,boxShadow } from 'styled-system'
 
 const Button = styled(TouchableOpacity)(
     compose(
@@ -10,7 +10,10 @@ const Button = styled(TouchableOpacity)(
         flexbox,
         borderRadius,
         border,
-        position
+        position,
+        zIndex,
+        shadow,
+        boxShadow
     ),
 );
  

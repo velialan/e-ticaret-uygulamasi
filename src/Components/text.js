@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Text as T} from 'react-native';
-import {compose, color, size, space,typography,position } from 'styled-system'
+import {compose, color, size, space,typography,position,fontFamily,lineHeight } from 'styled-system'
 
 const Text = styled(T)(
     compose(
@@ -8,8 +8,9 @@ const Text = styled(T)(
         space,
         color,
         size,
-        position
-               
+        position,
+        fontFamily,
+        lineHeight    
     ),
 );
  

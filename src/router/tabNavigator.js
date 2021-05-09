@@ -1,44 +1,59 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Favorite from '../screens/favorite';
+import Kategori from '../screens/kategori';
+import ShopScreen from '../screens/shop';
 import HomeScreen from '../screens/home';
-import Notification from '../screens/notification';
+import Favorilerim from '../screens/favorilerim';
 import Profile from '../screens/profile';
-import { Home, Heart, Bell, User } from '../Components/icons';
+import { Home, Heart, Bell, User,AlignJustify,ShoppingCart } from '../Components/icons';
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
     return (
-        <Tab.Navigator >
+        <Tab.Navigator tabBarOptions={{            
+            style:{ height:65, borderTopLeftRadius:20 ,borderTopRightRadius:20,elevation:20},
+            activeTintColor:'#DB3022',
+            inactiveTintColor:'#9B9B9B',
+            labelStyle:{fontWeight:'bold'}
+        }} >
                           
 
             <Tab.Screen
                 options={{
                     tabBarLabel: 'Ana Sayfa',
                     tabBarIcon: ({ color, size }) => (
-                        <Home height={size} width={size} stroke={color} />
+                        <Home height={size+5} width={size+5} stroke={color} />
                     )
                 }} name="Home" component={HomeScreen} />
 
             <Tab.Screen
                 options={{
-                    tabBarLabel: 'Favori',
+                    tabBarLabel: 'Kategori',
                     tabBarIcon: ({ color, size }) => (
 
-                        <Heart height={size} width={size} stroke={color} />
+                        <AlignJustify height={size} fill={color} width={size} stroke={color} />
 
                     )
-                }} name="Favorite" component={Favorite} />
+                }} name="Kategori" component={Kategori} />
+                <Tab.Screen
+                options={{
+                    tabBarLabel: 'Sepetim',
+                    tabBarIcon: ({ color, size }) => (
+
+                        <ShoppingCart height={size} fill={color} width={size} stroke={color} />
+
+                    )
+                }} name="Sepetim" component={ShopScreen} />
 
             <Tab.Screen
                 options={{
-                    tabBarLabel: 'Notification',
+                    tabBarLabel: 'Favorilerim',
                     tabBarIcon: ({ color, size }) => (
 
-                        <Bell height={size} width={size} stroke={color} />
+                        <Heart height={size} fill={color} width={size} stroke={color} />
 
                     )
-                }} name="Notification" component={Notification} />
+                }} name="Favorilerim"  component={Favorilerim} />
 
             <Tab.Screen
                 ptions={{

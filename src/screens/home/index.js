@@ -33,9 +33,11 @@ export default function Home() {
     const isProductFetching = useSelector(state => state.product.isProductFetching);
 
     const isSliderFetching = useSelector(state => state.slider.isSliderFetching);
+    const id_token = useSelector(state => state.auth.id_token);
 
 
     const getData = async () => {
+        console.log(id_token)
         try {
             const value = await AsyncStorage.getItem('id_token')
             if (value !== null) {
@@ -48,7 +50,7 @@ export default function Home() {
     }
 
     const sepeteEkle = (id) => {
-        dispatch(Addcart({ product_id:id}))
+        dispatch(Addcart({ id: id, token: id_token }))
     }
     return (
         <Box as={ScrollView} flex={1} bg="#fff" >
@@ -74,35 +76,37 @@ export default function Home() {
                 )}
             <Box mx={10}>
                 <Box mx={10} my={10} flexDirection="row" justifyContent="space-between">
-                    <Text fontSize={16} color="blue" fontWeight="bold">Öne Çıkanlar</Text>
+                    <Text fontSize={20} color="black" fontFamily="rokkitt_bold">Öne Çıkanlar</Text>
                     <Button>
-                        <Text fontSize={16} color="blue" fontWeight="bold">Tümünü gör</Text>
+                        <Text fontSize={16} color="black" fontFamily="rokkitt_regular">Tümünü gör</Text>
                     </Button>
                 </Box>
                 {isProductFetching ? <ActivityIndicator size="large" color="red" /> : (
                     <FlatList
+                        pagingEnabled={true}
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={products}
-                        renderItem={({ item, index }) => <Product onpress={()=>sepeteEkle(item.id)} key={index.toString()} image={item.base_image.original_image_url} price={item.formated_price} title={item.name} />}
+                        renderItem={({ item, index }) => <Product onpress={() => sepeteEkle(item.id)} key={index.toString()} data={item} />}
                         keyExtractor={item => item.id}
                     />
                 )}
             </Box>
 
             <Box mx={10}>
-                <Box mx={5} flexDirection="row" justifyContent="space-between">
-                    <Text fontSize={16} color="blue" fontWeight="bold">Yeni Ürünler</Text>
+                <Box mx={10} my={10} flexDirection="row" justifyContent="space-between">
+                    <Text fontSize={20} color="black" fontFamily="rokkitt_bold">Yeni Ürünler</Text>
                     <Button>
-                        <Text fontSize={16} color="blue" fontWeight="bold">Tümünü gör</Text>
+                        <Text fontSize={16} color="black" fontFamily="rokkitt_regular">Tümünü gör</Text>
                     </Button>
                 </Box>
                 {isProductFetching ? <ActivityIndicator size="large" color="red" /> : (
                     <FlatList
+                        pagingEnabled={true}
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={products}
-                        renderItem={({ item, index }) => <Product key={index.toString()} image={item.base_image.original_image_url} price={item.formated_price} title={item.name} />}
+                        renderItem={({ item, index }) => <Product onpress={() => sepeteEkle(item.id)} key={index.toString()} data={item} />}
                         keyExtractor={item => item.id}
                     />
                 )}
