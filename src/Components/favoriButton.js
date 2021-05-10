@@ -4,7 +4,7 @@ import Button from './button'
 import { Heart } from './icons'
 
 
-export default function favoriButton({ is_wishlisted, onpress, ...props }) {
+export default function FavoriButton({ is_wishlisted, onpress, ...props }) {
     return (
         <Button
         {...props}
