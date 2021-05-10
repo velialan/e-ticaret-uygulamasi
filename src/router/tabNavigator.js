@@ -22,7 +22,7 @@ export default function Tabs() {
                 options={{
                     tabBarLabel: 'Ana Sayfa',
                     tabBarIcon: ({ color, size }) => (
-                        <Home height={size+5} width={size+5} stroke={color} />
+                        <Home height={size} width={size} stroke={color} />
                     )
                 }} name="Home" component={HomeScreen} />
 

@@ -7,7 +7,8 @@ import { GET_SLIDER_SUCCESS, GET_SLIDER_REQUEST, GET_SLIDER_FAILURE } from '../.
 
 function sliderReducer(state = {
     isSliderFetching: false,
-    data: []
+    sliders: [],
+    errorMessage:''
 }, action) {
     switch (action.type) {
         case GET_SLIDER_REQUEST:

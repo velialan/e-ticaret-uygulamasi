@@ -15,10 +15,12 @@ import { FlatList, ActivityIndicator, useWindowDimensions, StatusBar, ScrollView
 import { FlatListSlider } from 'react-native-flatlist-slider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Addcart } from '../../actions/cart';
+import FastImage from 'react-native-fast-image';
 
 export default function Home() {
 
     React.useEffect(() => {
+
         dispatch(GETProduct({ param: '?new=0&featured=1' }))
         dispatch(GETSlider())
     }, [])
@@ -37,7 +39,6 @@ export default function Home() {
 
 
     const getData = async () => {
-        console.log(id_token)
         try {
             const value = await AsyncStorage.getItem('id_token')
             if (value !== null) {
@@ -52,27 +53,38 @@ export default function Home() {
     const sepeteEkle = (id) => {
         dispatch(Addcart({ id: id, token: id_token }))
     }
+
     return (
         <Box as={ScrollView} flex={1} bg="#fff" >
             <StatusBar hidden backgroundColor="transparent" />
             {isSliderFetching ?
-                <Box justifyContent="center" height={windowHeight * .30} bg="#252a34">
+                <Box justifyContent="center" height={windowHeight * .35} bg="#252a34">
                     <ActivityIndicator size="large" color="red" />
                 </Box> : (
+                    <Box>
+                        <FlatList
+                            pagingEnabled={true}
+                            showsHorizontalScrollIndicator={false}
+                            horizontal={true}
+                            data={sliders}
+                            renderItem={({ item, index }) => (
+                                <FastImage
+                                    key={index}
+                                    style={{ height: windowHeight * .35, width: 360, borderRadius: 5 }}
+                                    source={{
+                                        uri: item.image_url,
+                                        headers: { Authorization: 'someAuthToken' },
+                                        priority: FastImage.priority.normal,
+                                    }}
+                                    resizeMode={FastImage.resizeMode.cover}
 
-                    <FlatListSlider
-                        data={sliders}
-                        imageKey={'image_url'}
-                        height={windowHeight * .30}
-                        width={windowWidth}
-                        timer={5000}
-                        onPress={item => alert(JSON.stringify(item))}
-                        indicatorContainerStyle={{ position: 'absolute', bottom: 20 }}
-                        indicatorActiveColor={'#8e44ad'}
-                        indicatorInActiveColor={'#ffffff'}
-                        indicatorActiveWidth={30}
-                        animation
-                    />
+                                />
+                            )}
+                            keyExtractor={item => item.id.toString()}
+                        />
+                        
+                    </Box>
+
                 )}
             <Box mx={10}>
                 <Box mx={10} my={10} flexDirection="row" justifyContent="space-between">
