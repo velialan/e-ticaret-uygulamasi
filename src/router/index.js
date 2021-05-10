@@ -27,14 +27,18 @@ function App() {
             } catch (e) {
 
                 dispatch(restoretoken(false));
-
+                setisLoading(false)
             }
             if (userToken !== null) {
-                setisLoading(false)
 
                 dispatch(restoretoken(true));
+                setisLoading(false)
+
+            }else{
+                dispatch(restoretoken(false));
+                setisLoading(false)
+
             }
-            setisLoading(false)
 
 
         };
