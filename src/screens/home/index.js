@@ -1,26 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser, GETUser, } from '../../actions/action'
-import { GETProduct } from '../../actions/product/action'
-import { GETSlider } from '../../actions/slider/action'
-import Box from '../../Components/box'
-import Image from '../../Components/image'
-import Button from '../../Components/button'
-
-import Text from '../../Components/text'
-import TextInput from '../../Components/textinput'
-import Product from '../../Components/product'
-import { Search } from '../../Components/icons';
+import { GETProduct } from '../../actions/product/action';
+import { GETSlider } from '../../actions/slider/action';
+import Box from '../../Components/box';
+import Button from '../../Components/button';
+import Text from '../../Components/text';
+import Product from '../../Components/product';
 import { FlatList, ActivityIndicator, useWindowDimensions, StatusBar, ScrollView } from 'react-native';
-import { FlatListSlider } from 'react-native-flatlist-slider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Addcart } from '../../actions/cart';
 import FastImage from 'react-native-fast-image';
 
-export default function Home() {
+export default function Home({navigation}) {
 
     React.useEffect(() => {
-
         dispatch(GETProduct({ param: '?new=0&featured=1' }))
         dispatch(GETSlider())
     }, [])
@@ -32,6 +25,7 @@ export default function Home() {
     const products = useSelector(state => state.product.products);
     const sliders = useSelector(state => state.slider.sliders);
 
+    
     const isProductFetching = useSelector(state => state.product.isProductFetching);
 
     const isSliderFetching = useSelector(state => state.slider.isSliderFetching);
@@ -50,10 +44,6 @@ export default function Home() {
         }
     }
 
-    const sepeteEkle = (id) => {
-        dispatch(Addcart({ id: id, token: id_token }))
-    }
-
     return (
         <Box as={ScrollView} flex={1} bg="#fff" >
             <StatusBar hidden backgroundColor="transparent" />
@@ -61,7 +51,7 @@ export default function Home() {
                 <Box justifyContent="center" height={windowHeight * .35} bg="#252a34">
                     <ActivityIndicator size="large" color="red" />
                 </Box> : (
-                    <Box>
+                    <Box height={windowHeight * .35}>
                         <FlatList
                             pagingEnabled={true}
                             showsHorizontalScrollIndicator={false}
@@ -81,14 +71,14 @@ export default function Home() {
                                 />
                             )}
                             keyExtractor={item => item.id.toString()}
-                        />
-                        
+                        />                     
+
                     </Box>
 
                 )}
             <Box mx={10}>
                 <Box mx={10} my={10} flexDirection="row" justifyContent="space-between">
-                    <Text fontSize={20} color="black" fontFamily="rokkitt_bold">Öne Çıkanlar</Text>
+                    <Text fontStyle="italic" fontWeight="bold" fontSize={20} color="black" fontFamily="rokkitt_bold">Öne Çıkanlar</Text>
                     <Button>
                         <Text fontSize={16} color="black" fontFamily="rokkitt_regular">Tümünü gör</Text>
                     </Button>
@@ -99,7 +89,7 @@ export default function Home() {
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={products}
-                        renderItem={({ item, index }) => <Product onpress={() => sepeteEkle(item.id)} key={index.toString()} data={item} />}
+                        renderItem={({ item, index }) => <Product onpress={() => navigation.navigate('productdetail',{product_index:index})} key={index.toString()} data={item} />}
                         keyExtractor={item => item.id}
                     />
                 )}
@@ -107,7 +97,7 @@ export default function Home() {
 
             <Box mx={10}>
                 <Box mx={10} my={10} flexDirection="row" justifyContent="space-between">
-                    <Text fontSize={20} color="black" fontFamily="rokkitt_bold">Yeni Ürünler</Text>
+                <Text fontStyle="italic" fontWeight="bold" fontSize={20} color="black" fontFamily="rokkitt_bold">Yeni Ürünler</Text>
                     <Button>
                         <Text fontSize={16} color="black" fontFamily="rokkitt_regular">Tümünü gör</Text>
                     </Button>
@@ -118,7 +108,7 @@ export default function Home() {
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={products}
-                        renderItem={({ item, index }) => <Product onpress={() => sepeteEkle(item.id)} key={index.toString()} data={item} />}
+                        renderItem={({ item, index }) => <Product onpress={() => navigation.navigate('productdetail',{product_index:index})} key={index.toString()} data={item} />}
                         keyExtractor={item => item.id}
                     />
                 )}

@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Kategori from '../screens/kategori';
 import ShopScreen from '../screens/shop';
-import HomeScreen from '../screens/home';
+import HomeStackNavigator from './HomeStackNavigator';
 import Favorilerim from '../screens/favorilerim';
 import Profile from '../screens/profile';
 import { Home, Heart, Bell, User,AlignJustify,ShoppingCart } from '../Components/icons';
@@ -24,7 +24,7 @@ export default function Tabs() {
                     tabBarIcon: ({ color, size }) => (
                         <Home height={size} width={size} stroke={color} />
                     )
-                }} name="Home" component={HomeScreen} />
+                }} name="Home" component={HomeStackNavigator} />
 
             <Tab.Screen
                 options={{

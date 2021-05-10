@@ -6,7 +6,7 @@ import Pressable from './pressable'
 
 import FastImage from 'react-native-fast-image'
 import { Heart } from './icons'
-
+import FavoriButton from '../Components/favoriButton'
 export default function Product({ data, onpress }) {
 
     const [loading, setloading] = React.useState(false)
@@ -26,7 +26,7 @@ export default function Product({ data, onpress }) {
                     <FastImage
                         style={{ height: 190, width: '100%', borderRadius: 5 }}
                         source={{
-                            uri: data?.base_image?.original_image_url,
+                            uri: data?.base_image?.large_image_url,
                             headers: { Authorization: 'someAuthToken' },
                             priority: FastImage.priority.normal,
                         }}
@@ -34,11 +34,9 @@ export default function Product({ data, onpress }) {
                         onLoadStart={start}
                         onLoadEnd={finish}
                     />
-                    <Button zIndex={10} style={{elevation:2}} justifyContent="center" alignItems="center" size={50} borderRadius="full" position="absolute" bottom={-25} right={-1} bg={data?.is_wishlisted ? "Primary" : "White"}>
-
-                        <Heart height={25} width={25} stroke={data?.is_wishlisted ? "#fff" : "#9B9B9B"} />
-
-                    </Button>
+                    <Box position="absolute" bottom={-25} right={-1}>
+                        <FavoriButton onpress={() => { }} is_wishlisted={data?.is_wishlisted} />
+                      </Box>
                 </Box>
 
                 <Text fontFamily="rokkitt_regular"  >{data?.name}</Text>
