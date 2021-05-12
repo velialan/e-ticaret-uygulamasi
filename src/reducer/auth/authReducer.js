@@ -1,10 +1,10 @@
 
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, RESTORE_TOKEN } from '../../actions/actionTypes'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, RESTORE_TOKEN, FORGOT_REQUEST, FORGOT_SUCCESS, FORGOT_FAILURE } from '../../actions/actionTypes'
 
 function authReducer(state = {
     isFetching: false,
     isAuthenticated: false,
-    errorMessage:null
+    errorMessage: '',
 }, action) {
     switch (action.type) {
         case RESTORE_TOKEN:
@@ -34,12 +34,37 @@ function authReducer(state = {
         case LOGOUT_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                isAuthenticated: false
+                isAuthenticated: false,
+                id_token: null
             })
         default:
             return state
     }
 }
 
+function forgotReducer(state = {
+    isFetching: false,
+    Message: ''
+}, action) {
+    switch (action.type) {
 
-export default authReducer
+        case FORGOT_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true,
+            })
+        case FORGOT_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                Message: action.message,
+            })
+        case FORGOT_FAILURE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                Message: action.message
+            })
+        default:
+            return state
+    }
+}
+
+export { authReducer, forgotReducer }

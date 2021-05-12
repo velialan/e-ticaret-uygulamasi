@@ -5,18 +5,28 @@ import ShopScreen from '../screens/shop';
 import HomeStackNavigator from './HomeStackNavigator';
 import Favorilerim from '../screens/favorilerim';
 import Profile from '../screens/profile';
-import { Home, Heart, Bell, User,AlignJustify,ShoppingCart } from '../Components/icons';
+import { Home, Heart, Bell, User, AlignJustify, ShoppingCart } from '../Components/icons';
+import { useSelector } from 'react-redux';
+
+
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
+    const carts = useSelector(state => state.cart.carts);
+
+    React.useEffect(() => {
+        console.log('---------------------sepetim------------------------------')
+        console.log(carts?.items_qty)
+        
+    }, [])
     return (
-        <Tab.Navigator tabBarOptions={{            
-            style:{ height:65, borderTopLeftRadius:20 ,borderTopRightRadius:20,elevation:20},
-            activeTintColor:'#DB3022',
-            inactiveTintColor:'#9B9B9B',
-            labelStyle:{fontWeight:'bold'}
+        <Tab.Navigator tabBarOptions={{
+            style: { height: 65, borderTopLeftRadius: 20, borderTopRightRadius: 20, elevation: 20 },
+            activeTintColor: '#DB3022',
+            inactiveTintColor: '#9B9B9B',
+            labelStyle: { fontWeight: 'bold' }
         }} >
-                          
+
 
             <Tab.Screen
                 options={{
@@ -35,8 +45,9 @@ export default function Tabs() {
 
                     )
                 }} name="Kategori" component={Kategori} />
-                <Tab.Screen
+            <Tab.Screen
                 options={{
+                    tabBarBadge:Math.round(carts?.items_qty),
                     tabBarLabel: 'Sepetim',
                     tabBarIcon: ({ color, size }) => (
 
@@ -53,7 +64,7 @@ export default function Tabs() {
                         <Heart height={size} fill={color} width={size} stroke={color} />
 
                     )
-                }} name="Favorilerim"  component={Favorilerim} />
+                }} name="Favorilerim" component={Favorilerim} />
 
             <Tab.Screen
                 ptions={{

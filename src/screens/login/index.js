@@ -15,7 +15,7 @@ export default function ALoginpp({ navigation }) {
     const dispatch = useDispatch();
 
     const isFetching = useSelector(state => state.auth.isFetching)
-    // const errorMessage = useSelector(state => state.auth.errorMessage)
+   const errorMessage = useSelector(state => state.auth.errorMessage)
 
 
     return (
@@ -57,23 +57,23 @@ export default function ALoginpp({ navigation }) {
                     value={password}
                     onChangeText={setpassword}
                 />
-                <Button onPress={() => navigation.push('forgotpassword')}>
+                <Button disabled={isFetching} onPress={() => navigation.push('forgotpassword')}>
                     <Text mt={12} textAlign="right" fontSize={14} fontFamily="rokkitt_regular">Şifremi unuttum</Text>
                 </Button>
-                <Button onPress={() => dispatch(loginUser({ email, password }))} my={32} style={{ elevation: 2 }} justifyContent="center" alignItems="center" borderRadius={25} bg="Primary" >
+                <Button disabled={isFetching} onPress={() => dispatch(loginUser({ email, password }))} my={32} style={{ elevation: 2 }} justifyContent="center" alignItems="center" borderRadius={25} bg="Primary" >
                     {
                         isFetching ? <ActivityIndicator style={{ paddingVertical: 18 }} size="small" color="#fff" /> : <Text fontFamily="rokkitt_regular" color="White" fontSize={18} py={14} >Giriş Yap</Text>
 
                     }
                 </Button>
+                <Text>{errorMessage}</Text>
+
                 <Box flexDirection="row" justifyContent="center">
                     <Text fontSize={16} fontFamily="rokkitt_regular">Hesabınız yok mu? hemen </Text>
-                    <Button onPress={() => navigation.push('register')}>
+                    <Button disabled={isFetching} onPress={() => navigation.push('register')}>
                         <Text fontSize={16} fontFamily="rokkitt_bold">Kaydolun</Text>
                     </Button>
                 </Box>
-
-
             </Box>
         </Box>
     )

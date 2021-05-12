@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, LOGOUT_SUCCESS, RESTORE_TOKEN } from '../actionTypes'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, LOGOUT_SUCCESS, RESTORE_TOKEN, FORGOT_REQUEST, FORGOT_SUCCESS, FORGOT_FAILURE } from '../actionTypes'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { API_URL } from '../../config';
@@ -15,7 +15,8 @@ function receiveLogout() {
     return {
         type: LOGOUT_SUCCESS,
         isFetching: false,
-        isAuthenticated: false
+        isAuthenticated: false,
+        id_token: null
     }
 }
 
@@ -36,6 +37,8 @@ async function removeValue() {
     }
 
 }
+
+
 
 function requestLogin(creds) {
     return {
@@ -85,9 +88,12 @@ export function loginUser(creds) {
         return axios.post(`${API_URL}/customer/login?token=true`, creds)
             .then(response => {
                 if (response.status == 200) {
+                    // console.log(response.data)
 
-                    AsyncStorage.setItem('id_token', response.data.token)
-                    dispatch(receiveLogin(response.data))
+                    AsyncStorage.setItem('id_token', response.data.token).then(() => {
+                        dispatch(receiveLogin(response.data))
+
+                    })
                 }
             }).catch(err => {
                 if (err.response.status == 401) {
@@ -134,12 +140,11 @@ function failureGETUSER(message) {
 // }
 
 //GET USER
-export function GETUser() {
-
+export function GETUser(param) {
 
     const config = {
         headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC95YXppbGltaXNsZXJpLmNvbVwvYXBpXC9jdXN0b21lclwvbG9naW4iLCJpYXQiOjE2MjA0Njk2NTUsImV4cCI6MTYyMDQ3MzI1NSwibmJmIjoxNjIwNDY5NjU1LCJqdGkiOiJBRmhaVDJsUGgyc2tVV1lKIiwic3ViIjoxLCJwcnYiOiI4ZmNhMDg4YWJhZTJmOWE4Zjg0YTVmMGJmNmE2NTI0NDkwNTViZTAwIn0.MWrbYNGn8XDG48xu9ZBOMA0vVJLz79NckEV4JReI7k8`,
+            Authorization: `Bearer ${param.token}`,
 
         }
     };
@@ -155,5 +160,56 @@ export function GETUser() {
                     dispatch(receiveGETUSER(response.data))
                 }
             }).catch(err => console.log("Error: ", err))
+    }
+}
+
+
+
+function requestForgot() {
+    return {
+        type: FORGOT_REQUEST,
+        isFetching: true,
+
+    }
+}
+
+function receiveForgot(message) {
+    return {
+        type: FORGOT_SUCCESS,
+        isFetching: false,
+        message
+    }
+}
+
+function forgotError(message) {
+    return {
+        type: FORGOT_FAILURE,
+        isFetching: false,
+        message
+    }
+}
+//FORGOT PASSWORD
+export function fotgotPassword(email) {
+    return dispatch => {
+        dispatch(requestForgot())
+        return axios.post(`${API_URL}/customer/forgot-password`, email)
+            .then(response => {
+                if (response.status == 200) {
+
+                    if (response?.data?.message) {
+                        dispatch(receiveForgot('Parola sıfırlama bağlantınız e-posta adresinize gönderildi!'))
+
+                    } else {
+                        dispatch(receiveForgot('Bu e-posta adresine sahip bir kullanıcı bulamıyoruz.'))
+
+                    }
+                }
+            }).catch(err => {
+                if (err.response.status == 401) {
+
+                    dispatch(forgotError("Bu e-posta adresine sahip bir kullanıcı bulamıyoruz."))
+                    //return Promise.reject("request failed")
+                }
+            })
     }
 }

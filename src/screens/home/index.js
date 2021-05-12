@@ -8,7 +8,6 @@ import Text from '../../Components/text';
 import Product from '../../Components/product';
 import { FlatList, ActivityIndicator, useWindowDimensions, StatusBar, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Addcart } from '../../actions/cart';
 import FastImage from 'react-native-fast-image';
 
 export default function Home({navigation}) {
@@ -60,7 +59,7 @@ export default function Home({navigation}) {
                             renderItem={({ item, index }) => (
                                 <FastImage
                                     key={index}
-                                    style={{ height: windowHeight * .35, width: 360, borderRadius: 5 }}
+                                    style={{ height: windowHeight * .35, width: windowWidth, borderRadius: 5 }}
                                     source={{
                                         uri: item.image_url,
                                         headers: { Authorization: 'someAuthToken' },

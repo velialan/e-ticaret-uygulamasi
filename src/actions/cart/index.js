@@ -1,4 +1,4 @@
-import { ADD_CART_REQUEST, ADD_CART_SUCCESS, ADD_CART_FAILURE } from '../actionTypes'
+import { ADD_CART_REQUEST, ADD_CART_SUCCESS, ADD_CART_FAILURE, GET_CART_REQUEST, GET_CART_SUCCESS, GET_CART_FAILURE, } from '../actionTypes'
 import axios from 'axios';
 import { API_URL } from '../../config';
 
@@ -30,13 +30,13 @@ function failureADDCART(message) {
 export function Addcart(params) {
     return dispatch => {
         dispatch(requestADDCART())
-        return axios.post(`${API_URL}/checkout/cart/add/${params.id}?token=true`, [{
+        return axios.post(`${API_URL}/checkout/cart/add/${params.id}`, {
             "product_id": params.id,
             "quantity": 1,
             "is_configurable": false
-        }], {
+        }, {
             headers: {
-                'Content-Type': 'application/json; charset=utf-8',
+                'Accept': 'application/json',
                 'Authorization': `Bearer ${params.token}`
             }
         })
@@ -45,11 +45,54 @@ export function Addcart(params) {
                     dispatch(failureADDCART("request failed"))
                     return Promise.reject("request failed")
                 } else if (response.status == 200) {
-                    console.log(response.data)
+                    // console.log(response.data)
                     dispatch(receiveADDCART(response.data))
                 }
             }).catch(err => console.log("Error: ", err))
     }
 }
 
+function requestGETCART() {
+    return {
+        type: GET_CART_REQUEST,
+        isGetCartFetching: true,
+    }
+}
 
+function receiveGETCART(data) {
+    return {
+        type: GET_CART_SUCCESS,
+        isGetCartFetching: false,
+        carts: data.data
+    }
+}
+
+function failureGETCART(message) {
+    return {
+        type: GET_CART_FAILURE,
+        isGetCartFetching: false,
+        message
+    }
+}
+//GET CART
+export function GETCart(param) {
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${param.token}`,
+        }
+    };
+    return dispatch => {
+        dispatch(requestGETCART())
+        return axios.get(`${API_URL}/checkout/cart`, config)
+            .then(response => {
+                if (response.status != 200) {
+                    dispatch(failureGETCART("request failed"))
+                    return Promise.reject("request failed")
+                } else if (response.status == 200) {
+                    // console.log(response.data)
+                    dispatch(receiveGETCART(response.data))
+                }
+            }).catch(err => console.log("Error: ", err))
+    }
+}
