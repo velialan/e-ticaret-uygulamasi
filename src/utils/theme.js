@@ -19,10 +19,11 @@ const radii = {
   full: 9999
 }
 const fonts = {
-  rokkitt_bold: "Rokkitt-Bold",
-  rokkitt_medium: "Rokkitt-Medium",
-  rokkitt_regular: "Rokkitt-Regular",
-
+  rokkitt_bold: "ABeeZee-Regular",
+  rokkitt_medium: "ABeeZee-Regular",
+  rokkitt_regular: "ABeeZee-Regular",
+  ABeeZee_regular: "ABeeZee-Regular",
+  ABeeZee_italic: "ABeeZee-Italic"
 }
 
 export default {

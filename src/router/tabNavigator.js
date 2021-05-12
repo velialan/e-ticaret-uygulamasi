@@ -15,7 +15,7 @@ export default function Tabs() {
     const carts = useSelector(state => state.cart.carts);
 
     React.useEffect(() => {
-        console.log('---------------------sepetim------------------------------')
+        
         console.log(carts?.items_qty)
         
     }, [])

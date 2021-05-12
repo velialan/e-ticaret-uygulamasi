@@ -15,6 +15,8 @@
 		D4296F8B0E204C979CB71CC2 /* Rokkitt-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BB572FD09BB461DAB4D4E16 /* Rokkitt-Bold.ttf */; };
 		79F7A57E0C8C4EBF91615B44 /* Rokkitt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1231AC1AB3DC49CC89F6313E /* Rokkitt-Medium.ttf */; };
 		02A7DF52121E4466B646C788 /* Rokkitt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD1D51C78E8D477FB3320975 /* Rokkitt-Regular.ttf */; };
+		66C67DE2C7CE46B3A8092A37 /* ABeeZee-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6141D90780834FACAC4CCA69 /* ABeeZee-Italic.ttf */; };
+		AE18CAC4BC1247E291A7302F /* ABeeZee-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC04869B698E41F7AB849432 /* ABeeZee-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		6BB572FD09BB461DAB4D4E16 /* Rokkitt-Bold.ttf */ = {isa = PBXFileReference; name = "Rokkitt-Bold.ttf"; path = "../src/assets/fonts/Rokkitt-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		1231AC1AB3DC49CC89F6313E /* Rokkitt-Medium.ttf */ = {isa = PBXFileReference; name = "Rokkitt-Medium.ttf"; path = "../src/assets/fonts/Rokkitt-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		DD1D51C78E8D477FB3320975 /* Rokkitt-Regular.ttf */ = {isa = PBXFileReference; name = "Rokkitt-Regular.ttf"; path = "../src/assets/fonts/Rokkitt-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6141D90780834FACAC4CCA69 /* ABeeZee-Italic.ttf */ = {isa = PBXFileReference; name = "ABeeZee-Italic.ttf"; path = "../src/assets/fonts/ABeeZee-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AC04869B698E41F7AB849432 /* ABeeZee-Regular.ttf */ = {isa = PBXFileReference; name = "ABeeZee-Regular.ttf"; path = "../src/assets/fonts/ABeeZee-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,8 @@
 				6BB572FD09BB461DAB4D4E16 /* Rokkitt-Bold.ttf */,
 				1231AC1AB3DC49CC89F6313E /* Rokkitt-Medium.ttf */,
 				DD1D51C78E8D477FB3320975 /* Rokkitt-Regular.ttf */,
+				6141D90780834FACAC4CCA69 /* ABeeZee-Italic.ttf */,
+				AC04869B698E41F7AB849432 /* ABeeZee-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -235,6 +241,8 @@
 				D4296F8B0E204C979CB71CC2 /* Rokkitt-Bold.ttf in Resources */,
 				79F7A57E0C8C4EBF91615B44 /* Rokkitt-Medium.ttf in Resources */,
 				02A7DF52121E4466B646C788 /* Rokkitt-Regular.ttf in Resources */,
+				66C67DE2C7CE46B3A8092A37 /* ABeeZee-Italic.ttf in Resources */,
+				AE18CAC4BC1247E291A7302F /* ABeeZee-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,14 +9,9 @@ import Product from '../../Components/product';
 import { FlatList, ActivityIndicator, useWindowDimensions, StatusBar, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FastImage from 'react-native-fast-image';
+import { GETCart } from '../../actions/cart';
 
 export default function Home({navigation}) {
-
-    React.useEffect(() => {
-        dispatch(GETProduct({ param: '?new=0&featured=1' }))
-        dispatch(GETSlider())
-    }, [])
-
     const windowWidth = useWindowDimensions().width;
     const windowHeight = useWindowDimensions().height;
     const dispatch = useDispatch();
@@ -24,24 +19,19 @@ export default function Home({navigation}) {
     const products = useSelector(state => state.product.products);
     const sliders = useSelector(state => state.slider.sliders);
 
-    
     const isProductFetching = useSelector(state => state.product.isProductFetching);
 
     const isSliderFetching = useSelector(state => state.slider.isSliderFetching);
     const id_token = useSelector(state => state.auth.id_token);
+    React.useEffect(() => {
+        dispatch(GETProduct({ param: '?new=0&featured=1' }))
+        dispatch(GETCart({token:id_token}));
+        dispatch(GETSlider())
+    }, [])
+
+   
 
 
-    const getData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('id_token')
-            if (value !== null) {
-                console.log(value)
-            }
-        } catch (e) {
-            console.log(e)
-
-        }
-    }
 
     return (
         <Box as={ScrollView} flex={1} bg="#fff" >
@@ -112,7 +102,6 @@ export default function Home({navigation}) {
                     />
                 )}
             </Box>
-            <Button onPress={getData}><Text>Getir</Text></Button>
 
         </Box>
     )

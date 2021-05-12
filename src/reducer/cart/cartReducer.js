@@ -7,7 +7,7 @@ import { ADD_CART_SUCCESS, ADD_CART_REQUEST, ADD_CART_FAILURE } from '../../acti
 
 function cartReducer(state = {
     isCartFetching: false,
-    data: []
+    carts: []
 }, action) {
     switch (action.type) {
         case ADD_CART_REQUEST:

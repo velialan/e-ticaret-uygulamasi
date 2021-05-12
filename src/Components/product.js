@@ -1,12 +1,10 @@
 import React from 'react'
 import Box from './box'
 import Text from './text'
-import Button from './button'
 import Pressable from './pressable'
-
 import FastImage from 'react-native-fast-image'
-import { Heart } from './icons'
 import FavoriButton from '../Components/favoriButton'
+
 export default function Product({ data, onpress }) {
 
     const [loading, setloading] = React.useState(false)

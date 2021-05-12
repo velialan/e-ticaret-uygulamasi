@@ -21,11 +21,31 @@ function receiveLogout() {
 }
 
 
-export function logoutUser() {
+export function logoutUser(param) {
+
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            Authorization: `Bearer ${param.token}`
+
+        }
+    };
     return dispatch => {
         dispatch(requestLogout())
-        removeValue();
-        dispatch(receiveLogout())
+        return axios.get(`${API_URL}/customer/logout`, config)
+            .then(response => {
+                if (response.status != 200) {
+                    dispatch(failureGETUSER("request failed"))
+                    return Promise.reject("request failed")
+                } else if (response.status == 200) {
+                    console.log(response.data)
+                    dispatch(receiveLogout())
+                }
+            }).catch(err => {
+                console.log("Error: ", err.response)
+                dispatch(receiveLogout())
+
+            })
     }
 }
 
@@ -88,11 +108,8 @@ export function loginUser(creds) {
         return axios.post(`${API_URL}/customer/login?token=true`, creds)
             .then(response => {
                 if (response.status == 200) {
-                    // console.log(response.data)
-
                     AsyncStorage.setItem('id_token', response.data.token).then(() => {
                         dispatch(receiveLogin(response.data))
-
                     })
                 }
             }).catch(err => {

@@ -90,7 +90,7 @@ export function GETCart(param) {
                     dispatch(failureGETCART("request failed"))
                     return Promise.reject("request failed")
                 } else if (response.status == 200) {
-                    // console.log(response.data)
+                   //console.log(response.data)
                     dispatch(receiveGETCART(response.data))
                 }
             }).catch(err => console.log("Error: ", err))
