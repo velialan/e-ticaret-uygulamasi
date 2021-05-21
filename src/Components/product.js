@@ -17,12 +17,12 @@ export default function Product({ data, onpress }) {
     }
     return (
 
-        <Box width={170} height={280} m={5} borderRadius={10}>
+        <Box width={140} height={240} m={5} borderRadius={10}>
 
             <Pressable flex={1} onPress={onpress} >
                 <Box>
                     <FastImage
-                        style={{ height: 190, width: '100%', borderRadius: 5 }}
+                        style={{ height: 170, width: '100%', borderRadius: 5 }}
                         source={{
                             uri: data?.base_image?.large_image_url,
                             headers: { Authorization: 'someAuthToken' },

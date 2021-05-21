@@ -11,7 +11,6 @@ export default function Shop() {
     const data = useSelector(state => state.cart.carts);
 
     React.useEffect(() => {
-        console.log(data)
         dispatch(GETCart({token:id_token}));       
     }, [data.items])
   
