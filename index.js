@@ -27,7 +27,8 @@ const Root = () => (
 );  
 // myStore.subscribe(() => {
 //   console.log(myStore.getState()?.cart.carts.items_qty);
-// });
+// }); 
+
 AppRegistry.registerComponent(appName, () => Root);
 
 

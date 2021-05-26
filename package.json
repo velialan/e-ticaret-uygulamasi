@@ -33,6 +33,7 @@
     "react-native-shimmer-placeholder": "^2.0.7",
     "react-native-svg": "^12.1.1-0",
     "react-redux": "^7.2.3",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
