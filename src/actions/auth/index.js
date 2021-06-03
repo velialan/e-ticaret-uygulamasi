@@ -38,13 +38,13 @@ export function logoutUser(param) {
                     dispatch(failureGETUSER("request failed"))
                     return Promise.reject("request failed")
                 } else if (response.status == 200) {
-                    console.log(response.data)
                     dispatch(receiveLogout())
+                    removeValue();
                 }
             }).catch(err => {
                 console.log("Error: ", err.response)
                 dispatch(receiveLogout())
-
+                removeValue();
             })
     }
 }

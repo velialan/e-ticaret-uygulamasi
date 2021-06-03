@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { View, } from 'react-native';
-import { compose, color, size, flexbox, space, borderRadius, position,layout } from 'styled-system'
+import { compose, color, size, flexbox, space, borderRadius, position,layout,zIndex } from 'styled-system'
 
 const Box = styled(View)(
     compose(
@@ -10,7 +10,8 @@ const Box = styled(View)(
         flexbox,
         borderRadius,        
         position,
-        layout   
+        layout,
+        zIndex
         
     ),
 );

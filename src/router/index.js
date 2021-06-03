@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { restoretoken } from '../actions/auth'
-import ProductDetail from '../screens/productDetail';
 const Stack = createStackNavigator();
 
 function App() {
