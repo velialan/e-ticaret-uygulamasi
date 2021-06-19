@@ -15,16 +15,30 @@ import { ThemeProvider } from 'styled-components'
 import theme from './src/utils/theme'
 const myStore = createStore(allReducers, applyMiddleware(thunk));
 // const persistor = persistStore(myStore); 
- 
-const Root = () => (     
-  <Provider store={myStore}> 
-    
+import { ApolloClient } from 'apollo-client';
+import { ApolloProvider } from '@apollo/react-hooks';
+
+
+// Initialize Apollo Client
+const client = new ApolloClient({
+  uri: 'https://yazilimisleri.com/graphql',
+  cache: new InMemoryCache()
+});
+
+
+
+const Root = () => (
+  <ApolloProvider client={client}>
+
+    <Provider store={myStore}>
+
       <ThemeProvider theme={theme}>
         <Router />
       </ThemeProvider>
-   
-  </Provider>   
-);  
+
+    </Provider>
+  </ApolloProvider>
+);
 // myStore.subscribe(() => {
 //   console.log(myStore.getState()?.cart.carts.items_qty);
 // }); 

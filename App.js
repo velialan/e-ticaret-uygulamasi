@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import Animated from 'react-native-reanimated/plugin';
 import BottomSheet from 'reanimated-bottom-sheet';
 
@@ -10,8 +10,7 @@ export default function App() {
         backgroundColor: 'white',
         padding: 16,
         height: 450,
-      }}
-    >
+      }}>
       <Text>Swipe down to close</Text>
     </View>
   );
@@ -20,18 +19,17 @@ export default function App() {
 
   return (
     <>
-     <Button
-          title="Open Bottom Sheet"
-          onPress={() => sheetRef.current.snapTo(100)}
-        />
+      <Button
+        title="Open Bottom Sheet"
+        onPress={() => sheetRef.current.snapTo(100)}
+      />
       <View
         style={{
           flex: 1,
           backgroundColor: 'papayawhip',
           alignItems: 'center',
           justifyContent: 'center',
-        }}
-      >
+        }}>
         <Button
           title="Open Bottom Sheet"
           onPress={() => sheetRef.current.snapTo(0)}
