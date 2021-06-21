@@ -15,13 +15,14 @@ export default function ALoginpp({ navigation }) {
     const dispatch = useDispatch();
 
     const isFetching = useSelector(state => state.auth.isFetching)
-   const errorMessage = useSelector(state => state.auth.errorMessage)
+    const errorMessage = useSelector(state => state.auth.errorMessage)
 
 
     return (
         <Box as={ScrollView} bg="#E5E5E5" flex={1} px={16}>
 
             <Text mt={106} fontSize={34} fontFamily="rokkitt_bold" >Login</Text>
+
             <Box mt={73}>
                 <TextInput
                     style={{
@@ -40,6 +41,7 @@ export default function ALoginpp({ navigation }) {
                     value={email}
                     onChangeText={setemail}
                 />
+
                 <TextInput
                     my={4}
                     style={{

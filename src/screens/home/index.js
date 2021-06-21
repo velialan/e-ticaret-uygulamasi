@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FastImage from 'react-native-fast-image';
 import { GETCart } from '../../actions/cart';
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
     const windowWidth = useWindowDimensions().width;
     const windowHeight = useWindowDimensions().height;
     const dispatch = useDispatch();
@@ -25,16 +25,17 @@ export default function Home({navigation}) {
     const id_token = useSelector(state => state.auth.id_token);
     React.useEffect(() => {
         dispatch(GETProduct({ param: '?new=0&featured=1' }))
-        dispatch(GETCart({token:id_token}));
+        dispatch(GETCart({ token: id_token }));
         dispatch(GETSlider())
     }, [])
 
-   
+
 
 
 
     return (
         <Box as={ScrollView} flex={1} bg="#fff" >
+            <Text>{id_token}</Text>
             <StatusBar hidden backgroundColor="transparent" />
             {isSliderFetching ?
                 <Box justifyContent="center" height={windowHeight * .35} bg="#252a34">
@@ -60,7 +61,7 @@ export default function Home({navigation}) {
                                 />
                             )}
                             keyExtractor={item => item.id.toString()}
-                        />                     
+                        />
 
                     </Box>
 
@@ -78,7 +79,7 @@ export default function Home({navigation}) {
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={products}
-                        renderItem={({ item, index }) => <Product onpress={() => navigation.navigate('productdetail',{product_index:index})} key={index.toString()} data={item} />}
+                        renderItem={({ item, index }) => <Product onpress={() => navigation.navigate('productdetail', { product_index: index })} key={index.toString()} data={item} />}
                         keyExtractor={item => item.id}
                     />
                 )}
@@ -86,7 +87,7 @@ export default function Home({navigation}) {
 
             <Box mx={10}>
                 <Box mx={10} my={10} flexDirection="row" justifyContent="space-between">
-                <Text fontStyle="italic" fontWeight="bold" fontSize={20} color="black" fontFamily="rokkitt_bold">Yeni Ürünler</Text>
+                    <Text fontStyle="italic" fontWeight="bold" fontSize={20} color="black" fontFamily="rokkitt_bold">Yeni Ürünler</Text>
                     <Button>
                         <Text fontSize={16} color="black" fontFamily="rokkitt_regular">Tümünü gör</Text>
                     </Button>
@@ -97,7 +98,7 @@ export default function Home({navigation}) {
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={products}
-                        renderItem={({ item, index }) => <Product onpress={() => navigation.navigate('productdetail',{product_index:index})} key={index.toString()} data={item} />}
+                        renderItem={({ item, index }) => <Product onpress={() => navigation.navigate('productdetail', { product_index: index })} key={index.toString()} data={item} />}
                         keyExtractor={item => item.id}
                     />
                 )}

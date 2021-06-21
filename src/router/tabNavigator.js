@@ -15,9 +15,9 @@ export default function Tabs() {
     const carts = useSelector(state => state.cart.carts);
 
     React.useEffect(() => {
-        
+
         console.log(carts?.items_qty)
-        
+
     }, [])
     return (
         <Tab.Navigator tabBarOptions={{
@@ -47,7 +47,7 @@ export default function Tabs() {
                 }} name="Kategori" component={Kategori} />
             <Tab.Screen
                 options={{
-                    tabBarBadge:Math.round(carts?.items_qty),
+                    tabBarBadge: carts?.items_qty ? Math.round(carts?.items_qty) : null,
                     tabBarLabel: 'Sepetim',
                     tabBarIcon: ({ color, size }) => (
 

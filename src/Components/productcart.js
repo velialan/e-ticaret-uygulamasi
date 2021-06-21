@@ -4,8 +4,9 @@ import Button from './button'
 import Text from './text'
 import Pressable from './pressable'
 import FastImage from 'react-native-fast-image'
-import { MoreVertical } from './icons'
-export default function ProductCart({ data, onpress }) {
+import { Trash } from './icons'
+import { useSelector } from 'react-redux'
+export default function ProductCart({ data, onpressDelete }) {
 
 
     return (
@@ -25,14 +26,14 @@ export default function ProductCart({ data, onpress }) {
                 />
 
             </Box>
-            <Box  justifyContent="center" flex={1} p={8}>
+            <Box justifyContent="center" flex={1} p={8}>
                 <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-                    <Text fontSize={16}  style={{ fontStyle: 'italic', fontWeight: 'bold' }} fontFamily="rokkitt_regular"  >{data?.name}</Text>
-                    <Button>
-                        <MoreVertical height={16} stroke="#000" />
+                    <Text fontSize={16} style={{ fontStyle: 'italic', fontWeight: 'bold' }} fontFamily="rokkitt_regular"  >{data?.name}</Text>
+                    <Button onPress={() => onpressDelete(data.id)}>
+                        <Trash height={16} stroke="#000" />
                     </Button>
                 </Box>
-                <Text fontSize={11} style={{  lineHeight: 13 }} fontFamily="rokkitt_regular"  >Color: Black</Text>
+                <Text fontSize={11} style={{ lineHeight: 13 }} fontFamily="rokkitt_regular"  >Color: Black</Text>
                 <Box flex={1} flexDirection="row" alignItems="center" justifyContent="space-between">
                     <Box flexDirection="row"  >
                         <Button size={36} borderRadius="full" bg="White" justifyContent="center" alignItems="center" style={{ elevation: 2 }}>

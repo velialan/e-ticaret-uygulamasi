@@ -26,13 +26,13 @@ export function logoutUser(param) {
     const config = {
         headers: {
             'Accept': 'application/json',
-            Authorization: `Bearer ${param.token}`
+            "Authorization": `Bearer ${param.token}`
 
         }
     };
     return dispatch => {
         dispatch(requestLogout())
-        return axios.get(`${API_URL}/customer/logout`, config)
+        return axios.get(`${API_URL}/customer/logout?token=true`, config)
             .then(response => {
                 if (response.status != 200) {
                     dispatch(failureGETUSER("request failed"))
@@ -51,7 +51,7 @@ export function logoutUser(param) {
 
 async function removeValue() {
     try {
-        await AsyncStorage.removeItem('id_token')
+        await AsyncStorage.clear();
     } catch (e) {
         // remove error
     }
@@ -108,13 +108,14 @@ export function loginUser(creds) {
         return axios.post(`${API_URL}/customer/login?token=true`, creds)
             .then(response => {
                 if (response.status == 200) {
+                    console.log(response.data)
                     AsyncStorage.setItem('id_token', response.data.token).then(() => {
                         dispatch(receiveLogin(response.data))
                     })
                 }
             }).catch(err => {
                 if (err.response.status == 401) {
-
+                    AsyncStorage.clear();
                     dispatch(loginError("Email veya şifre Hatalı"))
                     //return Promise.reject("request failed")
                 }
@@ -161,7 +162,7 @@ export function GETUser(param) {
 
     const config = {
         headers: {
-            Authorization: `Bearer ${param.token}`,
+            "Authorization": `Bearer ${param.token}`,
 
         }
     };
