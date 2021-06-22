@@ -4,6 +4,7 @@ import { authReducer, forgotReducer } from './auth/authReducer'
 import productReducer from './product/productReducer'
 import sliderReducer from './slider/sliderReducer'
 import cartReducer from './cart/cartReducer'
+import categoryReducer from './category/CategoryReducer'
 
 import { combineReducers } from 'redux'
 
@@ -31,7 +32,9 @@ const allReducers = combineReducers({
     forgot: forgotReducer,
     product: productReducer,
     slider: sliderReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    category: categoryReducer
+
 })
 
 export default allReducers;

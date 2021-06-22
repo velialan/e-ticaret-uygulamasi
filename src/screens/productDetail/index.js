@@ -5,11 +5,13 @@ import Button from '../../Components/button'
 import Text from '../../Components/text'
 import { FlatList, ActivityIndicator, useWindowDimensions, ScrollView } from 'react-native';
 import { Addcart } from '../../actions/cart';
+import { ADDWishlist } from '../../actions/product/action';
+
 import FastImage from 'react-native-fast-image';
 import FavoriButton from '../../Components/favoriButton';
 import { Share } from '../../Components/icons';
 export default function ProductDetail({ navigation, route }) {
-    const { product_index } = route.params;   
+    const { product_index } = route.params;
     const windowWidth = useWindowDimensions().width;
     const windowHeight = useWindowDimensions().height;
     const dispatch = useDispatch();
@@ -20,13 +22,18 @@ export default function ProductDetail({ navigation, route }) {
     const token = useSelector(state => state.auth.id_token);
 
     const sepeteEkle = (id) => {
-        console.log(token);
         dispatch(Addcart({ id: id, token: token }))
+    }
+    React.useEffect(() => {
+        console.log(product)
+
+    }, [])
+    const favoriEkle = (id) => {
+        dispatch(ADDWishlist({ product_id: id, token: token }))
     }
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerTitleStyle: { alignSelf: 'center' },
-
             headerTitle: product.name,
             headerRight: () => (
                 <Button onPress={() => { }} pr={10}>

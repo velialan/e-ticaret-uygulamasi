@@ -35,7 +35,7 @@ export default function Home({ navigation }) {
 
     return (
         <Box as={ScrollView} flex={1} bg="#fff" >
-            <Text>{id_token}</Text>
+
             <StatusBar hidden backgroundColor="transparent" />
             {isSliderFetching ?
                 <Box justifyContent="center" height={windowHeight * .35} bg="#252a34">

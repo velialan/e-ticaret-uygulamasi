@@ -28,6 +28,8 @@ function failureADDCART(message) {
 
 //GET PRODUCT
 export function Addcart(params) {
+
+    console.log(params)
     return dispatch => {
         dispatch(requestADDCART())
         return axios.post(`${API_URL}/checkout/cart/add/${params.id}?login=true`, {

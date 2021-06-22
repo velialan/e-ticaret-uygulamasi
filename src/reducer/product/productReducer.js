@@ -1,15 +1,15 @@
 
-import { GET_PRODUCT_SUCCESS, GET_PRODUCT_REQUEST, GET_PRODUCT_FAILURE } from '../../actions/actionTypes'
-
+import { GET_PRODUCT_SUCCESS, GET_PRODUCT_REQUEST, GET_PRODUCT_FAILURE, ADD_WISHLIST_FAILURE, ADD_WISHLIST_SUCCESS, ADD_WISHLIST_REQUEST } from '../../actions/actionTypes'
 
 
 
 
 function productReducer(state = {
     isProductFetching: false,
-    data: []
+    isWishListFetching: false,
 }, action) {
     switch (action.type) {
+
         case GET_PRODUCT_REQUEST:
             return Object.assign({}, state, {
                 isProductFetching: true,
@@ -25,6 +25,20 @@ function productReducer(state = {
                 errorMessage: action.message
             })
 
+        case ADD_WISHLIST_REQUEST:
+            return Object.assign({}, state, {
+                isWishListFetching: true,
+            })
+        case ADD_WISHLIST_SUCCESS:
+            return Object.assign({}, state, {
+                isWishListFetching: false,
+                products: action.products
+            })
+        case ADD_WISHLIST_FAILURE:
+            return Object.assign({}, state, {
+                isWishListFetching: false,
+                errorMessage: action.message
+            })
         default:
             return state
     }
