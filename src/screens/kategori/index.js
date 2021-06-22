@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import { GETCategory } from '../../actions/category';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -16,44 +16,37 @@ export default function Kategori() {
     const category = useSelector(state => state.category.category);
     const isGetCategoryFetching = useSelector(state => state.category.isGetCategoryFetching);
 
-    React.useEffect(() => {
 
-        category.map(deger => {
-            console.log(deger.name)
-        })
-
-
-    }, [])
 
     return (
-        <Tab.Navigator
-            initialRouteName="Feed"
-            tabBarOptions={{
-                activeTintColor: '#DB3022',
-                labelStyle: { fontSize: 12, color: 'black', fontFamily: 'ABeeZee-Regular', textTransform: 'none' },
-                style: { backgroundColor: 'white' },
-                tabStyle: { height: 35 },
 
-            }}
-        >
-            {
-                isGetCategoryFetching && category.map(deger => {
-                    <Tab.Screen
+        isGetCategoryFetching ?
+
+            <View><Text>loading</Text></View>
+            :
+            (<Tab.Navigator
+                initialRouteName="Feed"
+                tabBarOptions={{
+                    scrollEnabled: true,
+                    activeTintColor: '#DB3022',
+                    labelStyle: { fontSize: 10, color: 'black', fontFamily: 'ABeeZee-Regular', textTransform: 'none', fontWeight: "bold" },
+                    style: { backgroundColor: 'white' },
+                    tabStyle: { height: 40 },
+
+                }}
+            >
+                {
+                    category.map((deger, index) => (<Tab.Screen
                         name={deger.slug}
                         component={CategoryScreen}
                         options={{ tabBarLabel: deger.name }}
-                    />
-                })
-
-            }
-            <Tab.Screen
-                name="Profiledsd"
-                component={CategoryScreen}
-                options={{ tabBarLabel: 'Profilefgdfg' }}
-            />
+                    />))
+                }
 
 
-        </Tab.Navigator>
+
+            </Tab.Navigator>)
+
     )
 }
 
