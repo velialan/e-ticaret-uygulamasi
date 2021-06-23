@@ -14,7 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components'
 import theme from './src/utils/theme'
 const myStore = createStore(allReducers, applyMiddleware(thunk));
-// const persistor = persistStore(myStore); 
+// const persistor = persistStore(myStore);  
 
 const Root = () => (
   <Provider store={myStore}>

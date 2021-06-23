@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
-import { GETCategory } from '../../actions/category';
+import { GETAllCategory, GETCategory } from '../../actions/category';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import CategoryScreen from './CategoryScreen';
 const Tab = createMaterialTopTabNavigator();
@@ -11,41 +11,37 @@ export default function Kategori() {
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(GETCategory({ parent_id: 1 }))
+        dispatch(GETAllCategory())
     }, [])
 
     const category = useSelector(state => state.category.category);
     const isGetCategoryFetching = useSelector(state => state.category.isGetCategoryFetching);
 
-
-
+    const tabnavigatorRender = category.map((item, index) => {
+        return <Tab.Screen key={index} name={item.slug} component={CategoryScreen} options={{ tabBarLabel: item.name }} initialParams={{ category_id: item.id }} />
+    });
+    if (isGetCategoryFetching)
+        return <ActivityIndicator size="small" color="red" />;
     return (
 
-        isGetCategoryFetching ?
 
-            <View><Text>loading</Text></View>
-            :
-            (<Tab.Navigator
-                initialRouteName="Feed"
-                tabBarOptions={{
-                    scrollEnabled: true,
-                    activeTintColor: '#DB3022',
-                    labelStyle: { fontSize: 10, color: 'black', fontFamily: 'ABeeZee-Regular', textTransform: 'none', fontWeight: "bold" },
-                    style: { backgroundColor: 'white' },
-                    tabStyle: { height: 40 },
+        <Tab.Navigator
 
-                }}
-            >
-                {
-                    category.map((deger, index) => (<Tab.Screen
-                        name={deger.slug}
-                        component={CategoryScreen}
-                        options={{ tabBarLabel: deger.name }}
-                    />))
-                }
+            tabBarOptions={{
+                scrollEnabled: true,
+                activeTintColor: '#DB3022',
+                inactiveTintColor: '#DB3022',
+                labelStyle: { fontSize: 10, color: 'black', fontFamily: 'ABeeZee-Regular', textTransform: 'none', fontWeight: "bold" },
+                style: { backgroundColor: 'white' },
+                tabStyle: { height: 40 },
+
+            }}
+        >
+            {tabnavigatorRender}
 
 
 
-            </Tab.Navigator>)
+        </Tab.Navigator>
 
     )
 }
