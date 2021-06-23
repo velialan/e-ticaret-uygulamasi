@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Box from '../../Components/box'
 import Button from '../../Components/button'
 import Text from '../../Components/text'
-import { FlatList, ActivityIndicator, useWindowDimensions, ScrollView } from 'react-native';
+import { FlatList, ActivityIndicator, useWindowDimensions, ScrollView, Share } from 'react-native';
 import { Addcart } from '../../actions/cart';
 import { ADDWishlist } from '../../actions/product/action';
 
 import FastImage from 'react-native-fast-image';
 import FavoriButton from '../../Components/favoriButton';
-import { Share } from '../../Components/icons';
+import { Share as ShareIcon } from '../../Components/icons';
 export default function ProductDetail({ navigation, route }) {
     const { product_index } = route.params;
     const windowWidth = useWindowDimensions().width;
@@ -31,13 +31,32 @@ export default function ProductDetail({ navigation, route }) {
     const favoriEkle = (id) => {
         dispatch(ADDWishlist({ product_id: id, token: token }))
     }
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                message:
+                    'React Native | A framework for building native apps using React',
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerTitleStyle: { alignSelf: 'center' },
             headerTitle: product.name,
             headerRight: () => (
-                <Button onPress={() => { }} pr={10}>
-                    <Share height={30} width={30} stroke="black" />
+                <Button onPress={onShare} pr={10}>
+                    <ShareIcon height={30} width={30} stroke="black" />
                 </Button>
 
             ),

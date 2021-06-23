@@ -11,7 +11,7 @@ export default function ProductCart({ data, onpressDelete }) {
 
     return (
 
-        <Box width="100%" flexDirection="row" style={{ elevation: 2 }} height={104} my={12} bg="White" borderRadius={8}>
+        <Box width="100%" flexDirection="row" style={{ elevation: 2 }} height={104} my={5} bg="White" borderRadius={8}>
 
             <Box>
                 <FastImage
@@ -28,7 +28,7 @@ export default function ProductCart({ data, onpressDelete }) {
             </Box>
             <Box justifyContent="center" flex={1} p={8}>
                 <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-                    <Text fontSize={16} style={{ fontStyle: 'italic', fontWeight: 'bold' }} fontFamily="rokkitt_regular"  >{data?.name}</Text>
+                    <Text numberOfLines={2} fontSize={16} style={{ fontStyle: 'italic', fontWeight: 'bold' }} fontFamily="rokkitt_regular"  >{data?.name}</Text>
                     <Button onPress={() => onpressDelete(data.id)}>
                         <Trash height={16} stroke="#000" />
                     </Button>
