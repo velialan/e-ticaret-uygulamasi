@@ -34,15 +34,15 @@ export default function Product({ data, onpress }) {
                     />
                     <Box position="absolute" bottom={-25} right={-1}>
                         <FavoriButton onpress={() => { }} is_wishlisted={data?.is_wishlisted} />
-                      </Box>
+                    </Box>
                 </Box>
 
-                <Text fontFamily="rokkitt_regular"  >{data?.name}</Text>
+                <Text numberOfLines={2} fontFamily="rokkitt_regular"  >{data?.name}</Text>
 
-                <Text fontSize={20} style={{ fontStyle: 'italic', fontWeight: 'bold' }} fontFamily="rokkitt_bold"  >{data?.name}</Text>
+                {/* <Text numberOfLines={2} fontSize={14} style={{ fontStyle: 'italic', fontWeight: 'bold' }} fontFamily="rokkitt_bold"  >{data?.name}</Text> */}
                 <Box flexDirection="row">
                     <Text p={2} style={{ textDecorationLine: 'line-through', }} fontFamily="rokkitt_regular">{data?.formated_price}₺</Text>
-                    <Text p={2} fontFamily="rokkitt_bold">{data?.formated_price}₺</Text>
+                    <Text p={2} fontFamily="rokkitt_bold" style={{ fontWeight: 'bold' }}>{data?.formated_price}₺</Text>
                 </Box>
             </Pressable>
         </Box>
