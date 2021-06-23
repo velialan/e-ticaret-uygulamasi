@@ -2,13 +2,16 @@ import React from 'react'
 import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import { GETSubCategory } from '../../actions/category';
-export default function CategoryScreen({ navigation, route }) {
+import Box from '../../Components/box';
+import CategoryCard from '../../Components/CategoryCard';
 
+export default function CategoryScreen({ navigation, route }) {
 
   const dispatch = useDispatch();
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       dispatch(GETSubCategory({ parent_id: route?.params?.category_id }))
+      console.log(category)
     });
 
     return unsubscribe;
@@ -18,9 +21,6 @@ export default function CategoryScreen({ navigation, route }) {
 
   const isGetSubCategoryFetching = useSelector(state => state.category.isGetSubCategoryFetching);
 
-  const renderItem = ({ item }) => (
-    <Text> {item.name} </Text>
-  );
   const renderFooter = () => {
     if (!isGetSubCategoryFetching) return null;
     return (
@@ -32,12 +32,14 @@ export default function CategoryScreen({ navigation, route }) {
     )
   }
   return (
+    <Box bg="#F9F9F9" flex={1} px={10}>
+      <FlatList
+        ListHeaderComponent={renderFooter}
+        data={category}
+        renderItem={CategoryCard}
+        keyExtractor={item => item.id}
+      />
+    </Box>
 
-    <FlatList
-      ListHeaderComponent={renderFooter}
-      data={category}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
   )
 }
