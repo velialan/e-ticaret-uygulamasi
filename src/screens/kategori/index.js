@@ -31,9 +31,8 @@ export default function Kategori() {
 
                 indicatorStyle: { backgroundColor: '#DB3022' },
                 scrollEnabled: true,
-                labelStyle: { fontSize: 10, color: 'black', fontFamily: 'ABeeZee-Regular', textTransform: 'none', fontWeight: "bold" },
+                labelStyle: { fontSize: 10, color: 'black', fontFamily: 'ABeeZee-Regular', fontWeight: "bold" },
                 style: { backgroundColor: 'white' },
-                tabStyle: { height: 40, },
 
             }}
         >
