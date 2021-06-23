@@ -80,7 +80,7 @@ export default function Shop() {
                 <Text>{data?.formated_sub_total}</Text>
             </Box>
             <Button onPress={() => { }} my={10} style={{ elevation: 2 }} justifyContent="center" alignItems="center" borderRadius={25} bg="Primary" >
-                <Text fontFamily="rokkitt_regular" color="White" fontSize={18} py={14} >Tamamla</Text>
+                <Text fontFamily="rokkitt_regular" color="White" fontSize={18} py={14} >Tamamla  {data?.formated_sub_total && `(${(data?.formated_sub_total)})`}</Text>
 
             </Button>
         </Box>

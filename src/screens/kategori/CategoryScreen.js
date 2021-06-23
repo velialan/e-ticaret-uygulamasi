@@ -11,7 +11,6 @@ export default function CategoryScreen({ navigation, route }) {
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       dispatch(GETSubCategory({ parent_id: route?.params?.category_id }))
-      console.log(category)
     });
 
     return unsubscribe;

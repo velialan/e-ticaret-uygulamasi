@@ -6,10 +6,10 @@ import Text from './text'
 export default function CategoryCard({ item }) {
   return (
     <Box flex={1} style={{ elevation: 2 }}
-      borderRadius={10} my={2} bg="white" height={100} color="white" alignItems="center" flexDirection="space-evenly" flexDirection="row">
+      borderRadius={4} my={4} bg="white" height={110} color="white" alignItems="center" flexDirection="space-evenly" flexDirection="row">
       <Text style={{ width: '50%', fontFamily: 'ABeeZee-Regular' }} pl={10}>{item.name}</Text>
       <FastImage
-        style={{ height: 100, width: '50%', borderTopRightRadius: 10, borderBottomRightRadius: 10 }}
+        style={{ height: 110, width: '50%', borderTopRightRadius: 6, borderBottomRightRadius: 6 }}
         source={{
           uri: item?.image_url,
           headers: { Authorization: 'someAuthToken' },
